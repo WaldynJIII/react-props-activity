@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import EnterNumber from '../EnterNumber/EnterNumber'
-
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 class CurrentTotal extends Component {
     state={
         total: 0,
@@ -18,8 +21,19 @@ class CurrentTotal extends Component {
     render() {
         return (
             <div >
-                <h1>{this.state.total}</h1>
-<EnterNumber setTotalUp={this.setTotalUp} setTotalDown={this.setTotalDown}/>
+                <Grid item md={3}>
+                <Card>
+                    <CardContent>
+                        <Typography>
+                            Current Total
+                        </Typography>
+                        <Typography>
+                            {this.state.total}
+                        </Typography>
+                    </CardContent>
+                </Card>
+                </Grid>
+<EnterNumber  setTotalUp={this.setTotalUp} setTotalDown={this.setTotalDown}/>
 
             </div>
         );

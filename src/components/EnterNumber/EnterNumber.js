@@ -5,6 +5,7 @@ class EnterNumber extends Component {
     state={
         toAdd: 0,
         numDis:[],
+        numToD: 0,
     }
 handleChangeFor=(event)=>{
 this.setState({
@@ -16,17 +17,24 @@ handleSubmitUp=(event)=>{
     event.preventDefault()
     this.props.setTotalUp(this.state.toAdd)
     this.setState({
-        toAdd: '',
-        numDis: [...this.state.numDis, this.state.toAdd]
-        }
-    )}
+        ...this.state,
+        numToD: this.state.toAdd
+    })
+    
+    }
     handleSubmitDown = (event) => {
         let negNum=-this.state.toAdd
         event.preventDefault()
         this.props.setTotalDown(negNum)
         this.setState({
+            ...this.state,
+            numToD: negNum
+        })
+    }
+    saveValue=()=>{
+        this.setState({
             toAdd: '',
-            numDis: [...this.state.numDis, negNum]
+            numDis: [...this.state.numDis,this.state.numToD ]
         }
         )
     }
@@ -42,10 +50,10 @@ handleSubmitUp=(event)=>{
                         value={this.state.toAdd}
                    />
                 <button onClick={this.handleSubmitDown}>Down</button>
-               
-               
+               <button onClick={this.saveValue}>Save</button>
+               <h2>Number To Save   "{this.state.numToD}"</h2>
                     <ul>
-          {this.state.numDis.map(num => (<History num={num}/>))}
+          {this.state.numDis.map(num => (<History key={num} num={num}/>))}
                 </ul>
             </div>
         );
